@@ -23,7 +23,7 @@ public class DoctorLoginController {
         this.doctorService = doctorService;
     }
 
-    @PostMapping("/doclogin")
+    @PostMapping("/doctorlogin")
     public ResponseEntity<?> loginPatient(@RequestBody DocLoginRequest loginRequest) {
         Optional<Doctor> doctorOptional = doctorService.findByEmpId(loginRequest.getEmpId());
 

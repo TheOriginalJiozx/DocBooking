@@ -22,6 +22,10 @@ h1 {
     color: #fff;
 }
 
+h2 {
+    text-align: center;
+}
+
 main {
     flex: 1;
     padding: 20px;

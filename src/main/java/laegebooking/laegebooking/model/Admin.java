@@ -1,39 +1,36 @@
 package laegebooking.laegebooking.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 @Setter
 @Getter
 @Entity
-public class Doctor {
+public class Admin {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String empId;
+
     private String firstName;
     private String middleName;
     private String lastName;
     private String phone;
-    private String empId;
     private String email;
     private String password;
 
-    public Doctor() {}
+    public Admin() {}
 
-    public Doctor(String firstName, String middleName, String lastName, String phone, String empId, String email, String password) {
+    public Admin(String empId, String firstName, String middleName, String lastName, String phone, String email, String password) {
+        this.empId = empId;
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
         this.phone = phone;
-        this.empId = empId;
         this.email = email;
         this.password = password;
     }
-
 }

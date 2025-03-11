@@ -17,17 +17,21 @@ public class DoctorService {
     private DoctorRepository doctorRepository;
 
     public DoctorDTO registerDoctor(DoctorDTO doctorDTO) {
+        if (doctorDTO.getEmpId() == null || doctorDTO.getEmpId().trim().isEmpty()) {
+            throw new IllegalArgumentException("Employee ID cannot be empty");
+        }
+
         String hashedPassword = hashMD5(doctorDTO.getPassword());
 
-        Doctor doctor = new Doctor(doctorDTO.getFirstName(), doctorDTO.getLastName(), doctorDTO.getPhone(), doctorDTO.getEmpId(), doctorDTO.getEmail(), hashedPassword);
+        Doctor doctor = new Doctor(doctorDTO.getFirstName(), doctorDTO.getMiddleName(), doctorDTO.getLastName(), doctorDTO.getPhone(), doctorDTO.getEmpId(), doctorDTO.getEmail(), hashedPassword);
         doctor = doctorRepository.save(doctor);
 
-        return new DoctorDTO(doctor.getId(), doctor.getFirstName(), doctor.getLastName(), doctor.getPhone(), doctor.getEmpId(), doctor.getEmail(), null);
+        return new DoctorDTO(doctor.getId(), doctor.getFirstName(), doctor.getMiddleName(), doctor.getLastName(), doctor.getPhone(), doctor.getEmpId(), doctor.getEmail(), null);
     }
 
     public DoctorDTO getDoctorById(Long id) {
         Doctor doctor = doctorRepository.findById(id).orElseThrow(() -> new RuntimeException("Doctor not found"));
-        return new DoctorDTO(doctor.getId(), doctor.getFirstName(), doctor.getLastName(), doctor.getPhone(), doctor.getEmpId(), doctor.getEmail(), null);
+        return new DoctorDTO(doctor.getId(), doctor.getFirstName(), doctor.getMiddleName(), doctor.getLastName(), doctor.getPhone(), doctor.getEmpId(), doctor.getEmail(), null);
     }
 
     public Optional<Doctor> findByEmpId(String empId) {

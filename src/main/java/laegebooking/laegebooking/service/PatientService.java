@@ -19,15 +19,15 @@ public class PatientService {
     public PatientDTO registerPatient(PatientDTO patientDTO) {
         String hashedPassword = hashMD5(patientDTO.getPassword());
 
-        Patient patient = new Patient(patientDTO.getFirstName(), patientDTO.getLastName(), patientDTO.getPhone(), patientDTO.getEmail(), hashedPassword);
+        Patient patient = new Patient(patientDTO.getFirstName(), patientDTO.getMiddleName(), patientDTO.getLastName(), patientDTO.getPhone(), patientDTO.getEmail(), hashedPassword);
         patient = patientRepository.save(patient);
 
-        return new PatientDTO(patient.getId(), patient.getFirstName(), patient.getLastName(), patient.getPhone(), patient.getEmail(), null);
+        return new PatientDTO(patient.getId(), patient.getFirstName(), patient.getMiddleName(), patient.getLastName(), patient.getPhone(), patient.getEmail(), null);
     }
 
     public PatientDTO getPatientById(Long id) {
         Patient patient = patientRepository.findById(id).orElseThrow(() -> new RuntimeException("Patient not found"));
-        return new PatientDTO(patient.getId(), patient.getFirstName(), patient.getLastName(), patient.getPhone(), patient.getEmail(), null);
+        return new PatientDTO(patient.getId(), patient.getFirstName(), patient.getMiddleName(), patient.getLastName(), patient.getPhone(), patient.getEmail(), null);
     }
 
     public Optional<Patient> findByEmail(String email) {

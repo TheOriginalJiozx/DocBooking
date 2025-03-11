@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Booking System - Doctor Registration</title>
+    <link rel="stylesheet" href="css/register.css">
+</head>
+<body>
+<header>
+    <script src="js/header.js"></script>
+</header>
+<h2>Doctor Registration</h2>
+
+<form id="doctorForm">
+    <label for="first_name">First Name:</label>
+    <input type="text" id="first_name" name="first_name" required oninput="generateEmpId()">
+
+    <label for="middle_name">Middle Name:</label>
+    <input type="text" id="middle_name" name="middle_name" oninput="generateEmpId()">
+
+    <label for="last_name">Last Name:</label>
+    <input type="text" id="last_name" name="last_name" required oninput="generateEmpId()">
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="phone">Phone:</label>
+    <input type="text" id="phone" name="phone" required oninput="generateEmpId()">
+
+    <label for="empId">Employee ID (Auto-generated):</label>
+    <input type="text" id="empId" name="empId" readonly>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required>
+
+    <button type="submit">Register</button>
+</form>
+
+<div id="response"></div>
+<div id="error-msg"></div>
+
+<footer>
+    <script src="js/footer.js"></script>
+</footer>
+
+<script src="js/doctor.js"></script>
+<script src="js/admin.js"></script>
+
+</body>
+</html>

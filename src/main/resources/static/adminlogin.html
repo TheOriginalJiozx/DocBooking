@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Booking System - Admin Login</title>
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+<header>
+    <script src="js/header.js"></script>
+</header>
+<div class="container">
+    <h2>Admin Login</h2>
+    <form id="loginForm">
+        <div class="form-group">
+            <label for="empId">Employee ID:</label>
+            <input type="text" id="empId" name="empId" required placeholder="Enter your Employee ID">
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required placeholder="Enter your password">
+        </div>
+        <button type="submit">Login</button>
+    </form>
+    <div class="text-center">
+        <a href="#">Forgot your password?</a>
+    </div>
+
+    <div id="response"></div>
+    <div id="error-msg"></div>
+</div>
+
+<footer>
+    <script src="js/footer.js"></script>
+</footer>
+
+<script src="js/adminlogin.js"></script>
+</body>
+</html>

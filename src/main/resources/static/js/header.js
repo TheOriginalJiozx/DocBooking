@@ -9,17 +9,33 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function handleAuthLinks() {
     const isLoggedIn = localStorage.getItem("isLoggedIn");
+    const empId = localStorage.getItem("empId");
 
     if (isLoggedIn === "true") {
         document.getElementById("register-link").style.display = "none";
         document.getElementById("login-link").style.display = "none";
-        document.getElementById("book-link").style.display = "inline";
         document.getElementById("logout-link").style.display = "inline";
+
+        checkIfDoctor(empId);
     }
+}
+
+function checkIfDoctor(empId) {
+    fetch(`/api/doctor/exists/${empId}`)
+        .then(response => response.json())
+        .then(exists => {
+            if (exists) {
+                document.getElementById("book-link").style.display = "none";
+            } else {
+                document.getElementById("book-link").style.display = "inline";
+            }
+        })
+        .catch(error => console.error('Error checking doctor:', error));
 }
 
 function logout() {
     localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("empId");
     localStorage.removeItem("userEmail");
 
     document.getElementById("register-link").style.display = "inline";

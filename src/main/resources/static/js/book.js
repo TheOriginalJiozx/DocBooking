@@ -46,3 +46,12 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('email').value = email;
     }
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+    const userEmail = localStorage.getItem("userEmail");
+    const empId = localStorage.getItem("empId");
+
+    if (!userEmail && !empId) {
+        window.location.href = "login.html";
+    }
+});
