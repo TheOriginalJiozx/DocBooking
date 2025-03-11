@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Booking System - Book an Appointment</title>
+    <link rel="stylesheet" href="css/book.css">
+    <script src="js/book.js"></script>
+</head>
+<body>
+<header>
+    <script src="js/header.js"></script>
+</header>
+<main>
+<h2>Book an Appointment</h2>
+
+<div class="container">
+    <form id="booking">
+        <label for="email">Your Email:</label>
+        <input type="email" id="email" readonly required><br>
+
+        <label for="doctorName">Doctor Name:</label>
+        <input type="text" id="doctorName" required><br>
+
+        <label for="bookingTime">Booking Time:</label>
+        <input type="datetime-local" id="bookingTime" required><br>
+
+        <button onclick="bookAppointment()">Book</button>
+    </form>
+
+    <div id="response"></div>
+    <div id="error-msg"></div>
+</div>
+</main>
+
+<footer>
+    <script src="js/footer.js"></script>
+</footer>
+</body>
+</html>

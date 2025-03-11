@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Booking System - Register Patient</title>
+    <link rel="stylesheet" href="css/register.css">
+</head>
+<body>
+<header>
+    <script src="js/header.js"></script>
+</header>
+
+<main>
+<div class="container">
+    <form id="registerForm">
+        <label for="first_name">First Name:</label>
+        <input type="text" id="first_name" required>
+
+        <label for="middle_name">Middle Name:</label>
+        <input type="text" id="middle_name" required>
+
+        <label for="last_name">Last Name:</label>
+        <input type="text" id="last_name" required>
+
+        <label for="tel">Phone:</label>
+        <input type="tel" id="tel" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" required>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" required>
+
+        <button id="registerButton" type="button">Register</button>
+    </form>
+
+    <div id="response"></div>
+    <div id="error-msg"></div>
+</div>
+</main>
+
+<script src="js/register.js"></script>
+<footer>
+    <script src="js/footer.js"></script>
+</footer>
+</body>
+</html>
