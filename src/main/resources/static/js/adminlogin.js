@@ -1,4 +1,12 @@
 document.addEventListener("DOMContentLoaded", function () {
+    const empIdStored = localStorage.getItem("empId");
+
+    if (empIdStored) {
+        console.log("Admin already logged in. Redirecting to index.html...");
+        window.location.href = "index.html";
+        return;
+    }
+
     document.getElementById('loginForm').addEventListener('submit', async function (event) {
         event.preventDefault();
 
@@ -29,6 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 throw new Error(result.message || "Login failed.");
             }
 
+            // Store login status
             localStorage.setItem("isLoggedIn", "true");
             localStorage.setItem("empId", empId);
 
@@ -37,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             setTimeout(() => {
                 window.location.href = "index.html";
-            }, 1000);
+            }, 2000);
 
         } catch (error) {
             console.error('Error during login:', error);

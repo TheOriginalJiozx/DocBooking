@@ -1,4 +1,12 @@
 document.addEventListener("DOMContentLoaded", function () {
+    const empIdStored = localStorage.getItem("empId");
+
+    if (empIdStored) {
+        console.log("Doctor already logged in. Redirecting to index.html...");
+        window.location.href = "index.html";
+        return;
+    }
+
     document.getElementById('loginForm').addEventListener('submit', async function (event) {
         event.preventDefault();
 
@@ -7,6 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const responseDiv = document.getElementById("response");
         const errorMsgDiv = document.getElementById("error-msg");
 
+        // Ryd tidligere beskeder
         responseDiv.textContent = "";
         errorMsgDiv.textContent = "";
 
@@ -29,6 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 throw new Error(result.message || "Login failed.");
             }
 
+            // Gem loginstatus
             localStorage.setItem("isLoggedIn", "true");
             localStorage.setItem("empId", empId);
 
@@ -37,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             setTimeout(() => {
                 window.location.href = "index.html";
-            }, 1000);
+            }, 2000);
 
         } catch (error) {
             console.error('Error during login:', error);
