@@ -36,6 +36,11 @@ public class AdminService {
         return adminRepository.findByEmpId(empId);
     }
 
+    public Optional<String> getAdminEmailByEmpId(String empId) {
+        return adminRepository.findByEmpId(empId)
+                .map(Admin::getEmail);
+    }
+
     public boolean isAdmin(String empId) {
         return adminRepository.findByEmpId(empId).isPresent();
     }

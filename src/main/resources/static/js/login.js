@@ -11,6 +11,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     const loginButton = document.getElementById('loginButton');
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
 
     if (!loginButton) {
         console.error("Login button not found!");
@@ -20,8 +22,8 @@ document.addEventListener("DOMContentLoaded", function () {
     loginButton.addEventListener('click', function () {
         console.log("Login button clicked");
 
-        let email = document.getElementById('email').value.trim();
-        let password = document.getElementById('password').value.trim();
+        let email = emailInput.value.trim();
+        let password = passwordInput.value.trim();
 
         console.log("Login attempt with:", { email, password });
 
@@ -66,5 +68,19 @@ document.addEventListener("DOMContentLoaded", function () {
                 console.error("Login failed:", error.message);
                 document.getElementById('error-msg').innerHTML = `<span style="color: red;">Error: ${error.message}</span>`;
             });
+    });
+
+    emailInput.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            loginButton.click();
+        }
+    });
+
+    passwordInput.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            loginButton.click();
+        }
     });
 });

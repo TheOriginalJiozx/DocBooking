@@ -11,15 +11,14 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
-public class Booking {
+public class PatientCourse {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long patientId;
-    private LocalDateTime bookingTime;
-    private String appointmentStatus;
-    private String service;
+    private String patientEmail;
     private String patientName;
-    private String doctorName;
+    private String courseStatus;
+    private LocalDateTime updatedAt;
 }

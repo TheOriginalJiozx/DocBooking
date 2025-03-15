@@ -2,6 +2,7 @@ package laegebooking.laegebooking.service;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 import java.util.Optional;
 
 import laegebooking.laegebooking.dto.DoctorDTO;
@@ -36,6 +37,14 @@ public class DoctorService {
 
     public Optional<Doctor> findByEmpId(String empId) {
         return doctorRepository.findByEmpId(empId);
+    }
+
+    public boolean isDoctor(String empId) {
+        return doctorRepository.findByEmpId(empId).isPresent();
+    }
+
+    public List<Doctor> getAllDoctors() {
+        return doctorRepository.findAll();
     }
 
     public String hashMD5(String input) {

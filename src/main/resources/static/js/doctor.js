@@ -24,7 +24,6 @@ document.getElementById("doctorForm").addEventListener("submit", async function(
     let responseDiv = document.getElementById("response");
     let errorMsgDiv = document.getElementById("error-msg");
 
-    // Nulstil tidligere beskeder
     responseDiv.textContent = "";
     errorMsgDiv.textContent = "";
 

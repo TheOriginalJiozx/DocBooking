@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Booking System - Patient Course Management</title>
+    <link rel="stylesheet" href="css/patientcourse.css">
+</head>
+<body>
+<header>
+    <script src="js/header.js"></script>
+</header>
+
+<main>
+    <section id="courseSection">
+        <h2>Manage Patient Course</h2>
+        <form id="courseForm">
+            <label for="patientName">Select Patient:</label>
+            <select id="patientName" required>
+                <option value="">Select a patient</option>
+            </select><br>
+
+            <label for="patientEmail">Patient Email:</label>
+            <input type="text" id="patientEmail" readonly><br>
+
+            <label for="courseStatus">Course Status:</label>
+            <select id="courseStatus" required>
+                <option value="Active">Active</option>
+                <option value="Concluded">Concluded</option>
+            </select><br>
+
+            <button type="submit">Update Status</button>
+        </form>
+
+        <div id="response"></div>
+        <div id="error-msg"></div>
+    </section>
+</main>
+
+<footer>
+    <script src="js/footer.js"></script>
+</footer>
+
+<script src="js/patientcourse.js"></script>
+</body>
+</html>

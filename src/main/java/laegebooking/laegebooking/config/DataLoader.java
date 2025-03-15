@@ -39,7 +39,7 @@ public class DataLoader {
                 System.out.println("Last Name: " + lastName);
                 System.out.println("Phone: " + phone);
                 System.out.println("Email: " + email);
-                System.out.println("Password: " + password);
+                System.out.println("Password: " + hashedPassword);
             }
         };
     }

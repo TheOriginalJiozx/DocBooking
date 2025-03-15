@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
     }
 
-    // Registreringslogik
     document.getElementById('registerButton').addEventListener('click', function() {
         console.log("Register button clicked");
 

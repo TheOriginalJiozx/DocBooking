@@ -1,32 +1,6 @@
 document.addEventListener('DOMContentLoaded', async () => {
     await populateDoctorNames();
-
-    const email = localStorage.getItem('userEmail');
-    if (email) {
-        document.getElementById('email').value = email;
-    } else {
-        const empId = localStorage.getItem('empId');
-        if (empId) {
-            try {
-                const response = await fetch(`/api/admin/${empId}`);
-                const result = await response.json();
-
-                if (response.ok && result.email) {
-                    localStorage.setItem('userEmail', result.email);
-                    document.getElementById('email').value = result.email;
-                } else {
-                    console.error('Admin email not found.');
-                    showError("Failed to load admin email.");
-                }
-            } catch (error) {
-                console.error('Error fetching admin email:', error);
-                showError('An error occurred while loading the admin email.');
-            }
-        } else {
-            console.error('No empId found in localStorage.');
-            showError('No admin logged in.');
-        }
-    }
+    await populatePatientNames();
 });
 
 async function populateDoctorNames() {
@@ -49,6 +23,29 @@ async function populateDoctorNames() {
     } catch (error) {
         console.error('Error fetching doctors:', error);
         showError('An error occurred while loading doctor names.');
+    }
+}
+
+async function populatePatientNames() {
+    try {
+        const response = await fetch('/api/patient/all');
+        const patients = await response.json();
+
+        if (response.ok) {
+            const patientSelect = document.getElementById('patientName');
+            patients.forEach(patient => {
+                const fullName = `${patient.firstName} ${patient.middleName ? patient.middleName + ' ' : ''}${patient.lastName}`;
+                const option = document.createElement('option');
+                option.value = patient.id;
+                option.textContent = fullName;
+                patientSelect.appendChild(option);
+            });
+        } else {
+            showError('Failed to load patient names.');
+        }
+    } catch (error) {
+        console.error('Error fetching patients:', error);
+        showError('An error occurred while loading patient names.');
     }
 }
 
@@ -93,39 +90,31 @@ function formatDateTime(dateTimeStr) {
 }
 
 async function bookAppointment() {
-    const email = localStorage.getItem('userEmail');
-
-    if (!email) {
-        showError("Email not found in local storage.");
-        return;
-    }
-
+    const patientId = document.getElementById("patientName").value;
     const doctorName = document.getElementById("doctorName").value;
     const service = document.getElementById("service").value;
     const bookingTime = document.getElementById("bookingTime").value;
 
-    if (!doctorName || !bookingTime) {
-        showError("Please provide both doctor name and booking time.");
+    if (!patientId || !doctorName || !bookingTime) {
+        showError("Please provide patient, doctor, and booking time.");
         return;
     }
 
     const bookingData = {
-        email: email,
+        patientId: patientId,
         service: service,
         doctorName: doctorName,
         bookingTime: bookingTime
     };
 
     try {
-        const response = await fetch('/api/patient/booking', {
+        const response = await fetch('/api/admin/booking', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(bookingData)
         });
 
         const result = await response.json();
-
-        console.log(result);
 
         if (response.ok) {
             showSuccess(result.message);
@@ -142,16 +131,12 @@ function showSuccess(message) {
     const responseDiv = document.getElementById('response');
     responseDiv.textContent = message;
     responseDiv.style.display = 'block';
-
-    const errorDiv = document.getElementById('error-msg');
-    errorDiv.style.display = 'none';
+    document.getElementById('error-msg').style.display = 'none';
 }
 
 function showError(message) {
     const errorDiv = document.getElementById('error-msg');
     errorDiv.textContent = message;
     errorDiv.style.display = 'block';
-
-    const responseDiv = document.getElementById('response');
-    responseDiv.style.display = 'none';
+    document.getElementById('response').style.display = 'none';
 }

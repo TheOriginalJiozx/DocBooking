@@ -10,7 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/doctor")
@@ -26,6 +28,23 @@ public class DoctorController {
     public ResponseEntity<Boolean> checkDoctorExists(@PathVariable String empId) {
         Optional<Doctor> doctor = doctorService.findByEmpId(empId);
         return doctor.isPresent() ? ResponseEntity.ok(true) : ResponseEntity.ok(false);
+    }
+
+    @GetMapping("/check")
+    public ResponseEntity<?> checkDoctor(@RequestHeader("Authorization") String empId) {
+        if (doctorService.isDoctor(empId)) {
+            return ResponseEntity.ok().body("Authorized");
+        }
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Unauthorized");
+    }
+
+    @GetMapping
+    public ResponseEntity<List<DoctorDTO>> getAllDoctors() {
+        List<Doctor> doctors = doctorService.getAllDoctors();
+        List<DoctorDTO> doctorDTOs = doctors.stream()
+                .map(doctor -> new DoctorDTO(doctor.getId(), doctor.getFirstName(), doctor.getMiddleName(), doctor.getLastName(), doctor.getPhone(), doctor.getEmpId(), doctor.getEmail(), null))
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(doctorDTOs);
     }
 
     @PostMapping("/docregister")

@@ -38,7 +38,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 throw new Error(result.message || "Login failed.");
             }
 
-            // Gem loginstatus
             localStorage.setItem("isLoggedIn", "true");
             localStorage.setItem("empId", empId);
 
